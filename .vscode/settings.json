@@ -1,0 +1,6 @@
+{
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces": false,
+"javascript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false
+}
