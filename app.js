@@ -9,7 +9,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-app.use(bodyParser.urlencoded({extended: true,}));
+app.use(bodyParser.urlencoded({ extended: true, }));
 app.use(express.static("public"));
 
 const articleSchema = {
@@ -40,9 +40,9 @@ app.route("/articles")
       content: req.body.content,
     });
 
-    newArticle.save().then(function(){
-        res.send("Added successfully");
-      })
+    newArticle.save().then(function () {
+      res.send("Added successfully");
+    })
       .catch(function (err) {
         res.send(err);
       });
@@ -58,16 +58,16 @@ app.route("/articles")
       });
   });
 
-  ////////////////////////////////////////////////////////// Requests Targetting Specific Articles ///////////////////////////
+////////////////////////////////////////////////////////// Requests Targetting Specific Articles ///////////////////////////
 
 app.route("/articles/:articleTitle")
   .get(function (req, res) {
-    Article.findOne({title:req.params.articleTitle}).then(function (foundArticle) {
-      res.send(foundArticle)      
+    Article.findOne({ title: req.params.articleTitle }).then(function (foundArticle) {
+      res.send(foundArticle)
     })
-    .catch(function () {
-      res.send("No article found");     
-    })
+      .catch(function () {
+        res.send("No article found");
+      })
   });
 
 app.listen(3000, function () {
