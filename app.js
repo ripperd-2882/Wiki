@@ -31,8 +31,6 @@ app.get("/articles", function (req, res) {
 })
 
 app.post("/articles",function (req,res) {   
-    console.log();
-    console.log();
 
     const newArticle=new Article({
         title:req.body.title,
@@ -45,6 +43,15 @@ app.post("/articles",function (req,res) {
     .catch(function (err) {
         res.send(err);        
     });
+})
+
+app.delete("/articles",function (req,res) {
+    Article.deleteMany().then(function(){
+        res.send("Deleted Successfully")
+    })    
+    .catch(function(err){
+        res.send(err)
+    })
 })
 
 app.listen(3000, function () {
