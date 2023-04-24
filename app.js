@@ -13,11 +13,14 @@ app.use(bodyParser.urlencoded({extended: true,}));
 app.use(express.static("public"));
 
 const articleSchema = {
-  name: String,
+  title: String,
   content: String,
 };
 
 const Article = mongoose.model("Article", articleSchema);
+
+
+////////////////////////////////////////////////////////// Requests Targetting all Articles ///////////////////////////
 
 app.route("/articles")
 
@@ -33,11 +36,11 @@ app.route("/articles")
 
   .post(function (req, res) {
     const newArticle = new Article({
-      name: req.body.name,
+      title: req.body.title,
       content: req.body.content,
     });
 
-    newArticle.save().then(function () {
+    newArticle.save().then(function(){
         res.send("Added successfully");
       })
       .catch(function (err) {
@@ -53,6 +56,18 @@ app.route("/articles")
       .catch(function (err) {
         res.send(err);
       });
+  });
+
+  ////////////////////////////////////////////////////////// Requests Targetting Specific Articles ///////////////////////////
+
+app.route("/articles/:articleTitle")
+  .get(function (req, res) {
+    Article.findOne({title:req.params.articleTitle}).then(function (foundArticle) {
+      res.send(foundArticle)      
+    })
+    .catch(function () {
+      res.send("No article found");     
+    })
   });
 
 app.listen(3000, function () {
