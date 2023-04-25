@@ -94,6 +94,15 @@ app.route("/articles/:articleTitle")
       .catch(function (err) {
         res.send(err)
       })
+  })
+
+  .delete(function (req, res) {
+    Article.deleteOne({ title: req.params.articleTitle }).then(function () {
+      res.send("Successfully Deleted")
+    })
+      .catch(function (err) {
+        res.send(err)
+      });
   });
 
 app.listen(3000, function () {
