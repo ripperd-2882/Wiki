@@ -80,16 +80,21 @@ app.route("/articles/:articleTitle")
       })
   })
 
-////////////////////////////////////////////// Needs revision //////////
-// .patch(function (req, res) {
-//   Article.updateOne({ title: req.body.title },
-//     { $set: req.body }).then(function () {
-//       res.send("Successfully Updated")
-//     })
-//     .catch(function (err) {
-//       res.send(err)
-//     })
-// });
+  ////////////////////////////////////////////// Patch-- Needs revision //////////
+
+  .patch(function (req, res) {
+    Article.updateOne({ title: req.params.articleTitle },
+      {
+        title: req.body.title,
+        content: req.body.content
+      },
+      { $set: req.body }).then(function () {
+        res.send("Successfully Updated")
+      })
+      .catch(function (err) {
+        res.send(err)
+      })
+  });
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
